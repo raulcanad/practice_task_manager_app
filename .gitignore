@@ -1,0 +1,32 @@
+# Dependencias
+node_modules/
+server/node_modules/
+client/node_modules/
+
+# Archivos de entorno
+.env
+.env.local
+.env.development
+.env.production
+
+# Builds
+dist/
+build/
+client/build/
+server/dist/
+
+# macOS
+.DS_Store
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Archivos de sistema
+Thumbs.db
+desktop.ini
+
+# Archivos de cobertura
+coverage/
+.nyc_output/
