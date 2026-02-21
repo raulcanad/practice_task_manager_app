@@ -31,9 +31,9 @@ async function readTasks() {
   } catch (error) {
     // If it is the first time we create new one. 
     const defaultTasks = [
-      { id: 1, title: 'Revisar documentación React', completed: false },
-      { id: 2, title: 'Preparar componentes demo', completed: true },
-      { id: 3, title: 'Practicar Hooks', completed: false }
+      { id: 1, title: 'Review React Doc', completed: false },
+      { id: 2, title: 'Prepare demo components', completed: true },
+      { id: 3, title: 'Practice Hooks', completed: false }
     ];
     await writeTasks(defaultTasks);
     return defaultTasks;
@@ -54,7 +54,7 @@ app.use(async (req, res, next) => {
 // Test path
 app.get('/', (req, res) => {
   res.json({ 
-    message: ' Servidor con persistencia JSON',
+    message: ' Server with JSON persistence',
     storage: 'tasks.json',
     endpoints: {
       tasks: '/api/tasks'
@@ -157,11 +157,11 @@ app.delete('/api/tasks/:id', async (req, res) => {
 // Start server
 app.listen(PORT, () => {
   console.log('\n' + '='.repeat(60));
-  console.log(' SERVIDOR CON PERSISTENCIA JSON');
+  console.log(' SERVER WITH JSON PERSISTENCE');
   console.log('='.repeat(60));
   console.log(` URL: http://localhost:${PORT}`);
   console.log(` API: http://localhost:${PORT}/api/tasks`);
-  console.log(` Archivo: ${TASKS_FILE}`);
-  console.log(` Los datos ahora son PERSISTENTES!`);
+  console.log(` Files: ${TASKS_FILE}`);
+  console.log(` The data is now persistance!`);
   console.log('='.repeat(60) + '\n');
 });
