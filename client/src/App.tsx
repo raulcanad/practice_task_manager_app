@@ -111,27 +111,11 @@ function App() {
           <span>Redux Counter: <strong>{count}</strong></span>
           <button 
             onClick={() => dispatch({ type: 'counter/increment' })}
-            style={{
-              padding: '5px 15px',
-              background: '#4CAF50',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
-            }}
           >
             +1
           </button>
           <button 
             onClick={() => dispatch({ type: 'counter/decrement' })}
-            style={{
-              padding: '5px 15px',
-              background: '#f44336',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
-            }}
           >
             -1
           </button>
