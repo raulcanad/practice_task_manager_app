@@ -15,16 +15,14 @@ const Counter = () => {
 
   return (
     <div>
-      <h3>Contador Redux: {count}</h3>
+      <h3>Redux Counter: {count}</h3>
       <button 
         onClick={() => dispatch(increment())}
-        style={{ marginRight: '0.5rem', padding: '0.5rem 1rem' }}
       >
         +1
       </button>
       <button 
         onClick={() => dispatch(decrement())}
-        style={{ padding: '0.5rem 1rem' }}
       >
         -1
       </button>
