@@ -69,8 +69,8 @@ app.get('/api/tasks', async (req, res) => {
     console.log(` Enviando ${tasks.length} tareas`);
     res.json(tasks);
   } catch (error) {
-    console.error('Error leyendo tareas:', error);
-    res.status(500).json({ error: 'Error al leer las tareas' });
+    console.error('Error reading tasks:', error);
+    res.status(500).json({ error: 'Error reading tasks' });
   }
 });
 
@@ -80,7 +80,7 @@ app.post('/api/tasks', async (req, res) => {
     const { title } = req.body;
     
     if (!title || title.trim() === '') {
-      return res.status(400).json({ error: 'El título es requerido' });
+      return res.status(400).json({ error: 'The title is required' });
     }
 
     const tasks = await readTasks();
@@ -97,11 +97,11 @@ app.post('/api/tasks', async (req, res) => {
     tasks.push(newTask);
     await writeTasks(tasks);
     
-    console.log(' Tarea guardada en JSON:', newTask);
+    console.log(' Task saved in  JSON:', newTask);
     res.status(201).json(newTask);
   } catch (error) {
-    console.error('Error creando tarea:', error);
-    res.status(500).json({ error: 'Error al crear la tarea' });
+    console.error('Error creating task:', error);
+    res.status(500).json({ error: 'Error creating task' });
   }
 });
 
@@ -114,7 +114,7 @@ app.put('/api/tasks/:id', async (req, res) => {
     const taskIndex = tasks.findIndex(t => t.id === id);
     
     if (taskIndex === -1) {
-      return res.status(404).json({ error: 'Tarea no encontrada' });
+      return res.status(404).json({ error: 'Task not found' });
     }
 
     tasks[taskIndex] = {
@@ -124,11 +124,11 @@ app.put('/api/tasks/:id', async (req, res) => {
     
     await writeTasks(tasks);
     
-    console.log(' Tarea actualizada en JSON:', tasks[taskIndex]);
+    console.log(' Task updated in JSON:', tasks[taskIndex]);
     res.json(tasks[taskIndex]);
   } catch (error) {
-    console.error('Error actualizando tarea:', error);
-    res.status(500).json({ error: 'Error al actualizar la tarea' });
+    console.error('Error updating task:', error);
+    res.status(500).json({ error: 'Error updating task' });
   }
 });
 
@@ -141,16 +141,16 @@ app.delete('/api/tasks/:id', async (req, res) => {
     const newTasks = tasks.filter(task => task.id !== id);
     
     if (newTasks.length === tasks.length) {
-      return res.status(404).json({ error: 'Tarea no encontrada' });
+      return res.status(404).json({ error: 'Task not found' });
     }
     
     await writeTasks(newTasks);
     
-    console.log(` Tarea ${id} eliminada del JSON`);
+    console.log(` Task ${id} deleted the JSON`);
     res.status(204).send();
   } catch (error) {
-    console.error('Error eliminando tarea:', error);
-    res.status(500).json({ error: 'Error al eliminar la tarea' });
+    console.error('Error deleting task:', error);
+    res.status(500).json({ error: 'Error deleting task' });
   }
 });
 
