@@ -1,5 +1,5 @@
-// src/App.tsx (renombrado de App.js)
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import { Task, ApiError } from './types';
@@ -9,6 +9,9 @@ function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  const count = useSelector((state: any) => state.counter?.value || 0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchTasks();
@@ -90,11 +93,50 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1> Task Manager</h1>
-        <p>Tecnical Demo - React + TypeScript</p>
+        <h1>Task Manager</h1>
+        <p>Technical Demo - React + TypeScript + Redux</p>
       </header>
 
       <main className="container">
+        {/* Redux Counter with working buttons */}
+        <div style={{ 
+          marginBottom: '20px', 
+          padding: '10px', 
+          background: '#f0f0f0', 
+          borderRadius: '4px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px'
+        }}>
+          <span>Redux Counter: <strong>{count}</strong></span>
+          <button 
+            onClick={() => dispatch({ type: 'counter/increment' })}
+            style={{
+              padding: '5px 15px',
+              background: '#4CAF50',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            +1
+          </button>
+          <button 
+            onClick={() => dispatch({ type: 'counter/decrement' })}
+            style={{
+              padding: '5px 15px',
+              background: '#f44336',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            -1
+          </button>
+        </div>
+
         {error && <div className="error">{error}</div>}
         
         <TaskForm onAddTask={addTask} />
