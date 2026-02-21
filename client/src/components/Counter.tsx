@@ -14,13 +14,7 @@ const Counter = () => {
   const dispatch = useDispatch();
 
   return (
-    <div style={{ 
-      background: 'white', 
-      padding: '1rem', 
-      borderRadius: '8px',
-      margin: '1rem 0',
-      textAlign: 'center'
-    }}>
+    <div>
       <h3>Contador Redux: {count}</h3>
       <button 
         onClick={() => dispatch(increment())}
