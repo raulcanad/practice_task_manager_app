@@ -1,11 +1,11 @@
 const express = require('express');
-const fs = require('fs').promises; // Para trabajar con archivos
+const fs = require('fs').promises; // To work with files
 const path = require('path');
 const cors = require('cors');
 const app = express();
-const PORT = 5001; // o 5000 si liberaste el puerto
+const PORT = 5001; // o 5000 but I hav mac using 5000 to other dev program
 
-// Configuración CORS
+// set up CORS
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -20,16 +20,16 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-// Ruta al archivo JSON
+// File JSON's path
 const TASKS_FILE = path.join(__dirname, 'tasks.json');
 
-// Función para leer tareas del archivo
+// Function to read files
 async function readTasks() {
   try {
     const data = await fs.readFile(TASKS_FILE, 'utf8');
     return JSON.parse(data);
   } catch (error) {
-    // Si el archivo no existe, creamos uno con datos por defecto
+    // If it is the first time we create new one. 
     const defaultTasks = [
       { id: 1, title: 'Revisar documentación React', completed: false },
       { id: 2, title: 'Preparar componentes demo', completed: true },
@@ -40,21 +40,21 @@ async function readTasks() {
   }
 }
 
-// Función para escribir tareas al archivo
+// Function to write tasks
 async function writeTasks(tasks) {
   await fs.writeFile(TASKS_FILE, JSON.stringify(tasks, null, 2));
 }
 
-// Middleware para logging
+// Middleware for  logging
 app.use(async (req, res, next) => {
-  console.log(`🕐 ${new Date().toLocaleTimeString()} - ${req.method} ${req.url}`);
+  console.log(` ${new Date().toLocaleTimeString()} - ${req.method} ${req.url}`);
   next();
 });
 
-// Ruta de prueba
+// Test path
 app.get('/', (req, res) => {
   res.json({ 
-    message: '✅ Servidor con persistencia JSON',
+    message: ' Servidor con persistencia JSON',
     storage: 'tasks.json',
     endpoints: {
       tasks: '/api/tasks'
@@ -62,11 +62,11 @@ app.get('/', (req, res) => {
   });
 });
 
-// GET /api/tasks - Leer todas las tareas
+// GET /api/tasks - Read all tasks 
 app.get('/api/tasks', async (req, res) => {
   try {
     const tasks = await readTasks();
-    console.log(`📤 Enviando ${tasks.length} tareas`);
+    console.log(` Enviando ${tasks.length} tareas`);
     res.json(tasks);
   } catch (error) {
     console.error('Error leyendo tareas:', error);
@@ -74,7 +74,7 @@ app.get('/api/tasks', async (req, res) => {
   }
 });
 
-// POST /api/tasks - Crear nueva tarea
+// POST /api/tasks - Create new task
 app.post('/api/tasks', async (req, res) => {
   try {
     const { title } = req.body;
@@ -85,7 +85,7 @@ app.post('/api/tasks', async (req, res) => {
 
     const tasks = await readTasks();
     
-    // Calcular nuevo ID (máximo ID + 1)
+    // Calc new ID (max ID + 1)
     const newId = tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
     
     const newTask = {
@@ -97,7 +97,7 @@ app.post('/api/tasks', async (req, res) => {
     tasks.push(newTask);
     await writeTasks(tasks);
     
-    console.log('✅ Tarea guardada en JSON:', newTask);
+    console.log(' Tarea guardada en JSON:', newTask);
     res.status(201).json(newTask);
   } catch (error) {
     console.error('Error creando tarea:', error);
@@ -105,7 +105,7 @@ app.post('/api/tasks', async (req, res) => {
   }
 });
 
-// PUT /api/tasks/:id - Actualizar tarea (completar/descompletar)
+// PUT /api/tasks/:id - Update task  (complete/uncomplete)
 app.put('/api/tasks/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -124,7 +124,7 @@ app.put('/api/tasks/:id', async (req, res) => {
     
     await writeTasks(tasks);
     
-    console.log('✅ Tarea actualizada en JSON:', tasks[taskIndex]);
+    console.log(' Tarea actualizada en JSON:', tasks[taskIndex]);
     res.json(tasks[taskIndex]);
   } catch (error) {
     console.error('Error actualizando tarea:', error);
@@ -132,7 +132,7 @@ app.put('/api/tasks/:id', async (req, res) => {
   }
 });
 
-// DELETE /api/tasks/:id - Eliminar tarea
+// DELETE /api/tasks/:id - Delete task
 app.delete('/api/tasks/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -146,7 +146,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
     
     await writeTasks(newTasks);
     
-    console.log(`✅ Tarea ${id} eliminada del JSON`);
+    console.log(` Tarea ${id} eliminada del JSON`);
     res.status(204).send();
   } catch (error) {
     console.error('Error eliminando tarea:', error);
@@ -154,14 +154,14 @@ app.delete('/api/tasks/:id', async (req, res) => {
   }
 });
 
-// Iniciar servidor
+// Start server
 app.listen(PORT, () => {
   console.log('\n' + '='.repeat(60));
-  console.log('🚀 SERVIDOR CON PERSISTENCIA JSON');
+  console.log(' SERVIDOR CON PERSISTENCIA JSON');
   console.log('='.repeat(60));
-  console.log(`📍 URL: http://localhost:${PORT}`);
-  console.log(`📡 API: http://localhost:${PORT}/api/tasks`);
-  console.log(`💾 Archivo: ${TASKS_FILE}`);
-  console.log(`📋 Los datos ahora son PERSISTENTES!`);
+  console.log(` URL: http://localhost:${PORT}`);
+  console.log(` API: http://localhost:${PORT}/api/tasks`);
+  console.log(` Archivo: ${TASKS_FILE}`);
+  console.log(` Los datos ahora son PERSISTENTES!`);
   console.log('='.repeat(60) + '\n');
 });

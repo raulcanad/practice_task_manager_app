@@ -69,28 +69,28 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-# Task Manager App - Demo Técnica
+# Task Manager App - Technical Demo
 
-Aplicación demo para entrevista técnica que demuestra habilidades en React, Node.js y CSS3.
+Demo application for technical interviews demonstrating skills in React, Node.js, and CSS3.
 
-## 🚀 Características
+## Features
 
-- CRUD completo de tareas
-- Interfaz responsive y moderna
-- Estados de carga y error
-- Estadísticas en tiempo real
-- API REST con Node.js
+- Full CRUD functionality for tasks
+- Responsive and modern interface
+- Load and error states
+- Real-time statistics
+- REST API with Node.js
 
-## 🛠️ Tecnologías
+## Technologies
 
 - **Frontend**: React 18 (Hooks, useState, useEffect)
 - **Backend**: Node.js + Express
-- **Estilos**: CSS3 (Flexbox, transiciones, gradientes)
-- **Comunicación**: Fetch API
+- **Styles**: CSS3 (Flexbox, transitions, gradients)
+- **Communication**: Fetch API
 
-## 📦 Instalación
+##  Installation
 
-1. Clonar repositorio
+1. Clone repository
 ```bash
-git clone https://github.com/tu-usuario/task-manager-app.git
+git clone https://github.com/your-username/task-manager-app.git
 cd task-manager-app

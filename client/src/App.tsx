@@ -24,7 +24,7 @@ function App() {
       setTasks(data);
       setLoading(false);
     } catch (err) {
-      setError('Error al cargar las tareas');
+      setError('Error loading tasks');
       setLoading(false);
     }
   };
@@ -46,7 +46,7 @@ function App() {
       setTasks([...tasks, newTask]);
       setError(null);
     } catch (err) {
-      setError('Error al añadir tarea');
+      setError('Error adding tasks');
     }
   };
 
@@ -57,7 +57,7 @@ function App() {
       });
       
       if (!response.ok) {
-        throw new Error('Error al actualizar');
+        throw new Error('Error updating');
       }
       
       const updatedTask: Task = await response.json();
@@ -65,7 +65,7 @@ function App() {
         task.id === id ? updatedTask : task
       ));
     } catch (err) {
-      setError('Error al actualizar tarea');
+      setError('Error updating task');
     }
   };
 
@@ -76,22 +76,22 @@ function App() {
       });
       
       if (!response.ok) {
-        throw new Error('Error al eliminar');
+        throw new Error('Error deleting the task');
       }
       
       setTasks(tasks.filter(task => task.id !== id));
     } catch (err) {
-      setError('Error al eliminar tarea');
+      setError('Error deleting the task');
     }
   };
 
-  if (loading) return <div className="container">Cargando...</div>;
+  if (loading) return <div className="container">Loading...</div>;
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>📋 Gestor de Tareas</h1>
-        <p>Demo técnica - React + TypeScript</p>
+        <h1> Task Manager</h1>
+        <p>Tecnical Demo - React + TypeScript</p>
       </header>
 
       <main className="container">
@@ -107,8 +107,8 @@ function App() {
         
         <div className="stats">
           <span>Total: {tasks.length}</span>
-          <span>Completadas: {tasks.filter(t => t.completed).length}</span>
-          <span>Pendientes: {tasks.filter(t => !t.completed).length}</span>
+          <span>Completed: {tasks.filter(t => t.completed).length}</span>
+          <span>Pending: {tasks.filter(t => !t.completed).length}</span>
         </div>
       </main>
     </div>
